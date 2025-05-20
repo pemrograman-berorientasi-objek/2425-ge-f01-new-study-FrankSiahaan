@@ -26,15 +26,21 @@ public class Exec {
 
     public void addStudent(String[] data) {
         entityManager.getTransaction().begin();
-        Student student = new Student(data[1], data[2], data[3]);
-        entityManager.persist(student);
+        Student tempstd;
+        if ((tempstd = entityManager.find(Student.class, data[1])) == null) {
+            Student student = new Student(data[1], data[2], data[3]);
+            entityManager.persist(student);
+        }
         entityManager.getTransaction().commit();
     }
 
     public void addCourse(String[] data) {
         entityManager.getTransaction().begin();
-        Course course = new Course(data[1], data[2], data[3], data[4]);
-        entityManager.persist(course);
+        Course tempcrs;
+        if ((tempcrs = entityManager.find(Course.class, data[1])) == null) {
+            Course course = new Course(data[1], data[2], data[3], data[4]);
+            entityManager.persist(course);
+        }
         entityManager.getTransaction().commit();
     }
 
